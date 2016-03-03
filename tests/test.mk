@@ -17,3 +17,5 @@ $(BATS): CURL_OPTS += -s
 $(BATS): | $(BATS_DIR)
 	$(call download,$(BATS_URL),tar zxf - -C $(BATS_DIR) --strip-components 1)
 	@touch $(BATS)
+
+CLEAN += $(BATS_DIR)

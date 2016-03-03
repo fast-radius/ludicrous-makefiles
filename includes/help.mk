@@ -3,10 +3,13 @@
 # those immeditately preceeding a recipe will be displayed along with thier
 # respective target names.
 #
+# Targets: help
+#
 # Requires: awk
 #
 # Side effects:
 #   * .DEFAULT_GOAL is set to to the `help` target from this file
+#
 INCLUDES_DIR := $(dir $(realpath $(lastword $(MAKEFILE_LIST))))
 HELP_PROGRAM := $(INCLUDES_DIR)/help.awk
 
