@@ -1,7 +1,7 @@
 # Utility functions and helpers useful for the common case.
 # Most of those zany makefiles require this file, so it's
 # sensible to `include` it first.
-
+#
 # Helper target for declaring an external executable as a recipe dependency.
 # For example,
 #   `my_target: | _program_awk`
