@@ -15,9 +15,13 @@ _program_%: FORCE
 # NOTE: This helper is not intended for external use.
 define import
 ifneq ($(1),$$(findstring $(1),$$(MAKEFILE_LIST)))
-include $$(dir $$(realpath $$(lastword $$(MAKEFILE_LIST))))/$(1)
+include $$(dir $$(realpath $$(lastword $$(MAKEFILE_LIST))))/$(1).mk
 endif
 endef
 
 FORCE:
 .PHONY: FORCE
+
+# These are particularly useful in most makefiles
+$(eval $(call import,log))
+$(eval $(call import,help))

@@ -28,7 +28,7 @@ teardown() {
 }
 
 @test 'bundler.mk fails without a Gemfile' {
-  run make -f includes/bundler.mk
+  run make -f includes/bundler.mk bundle
   [ "$status" -eq 2 ]
   [[ "${lines[0]}" =~ "No rule to make target \`Gemfile', needed by \`Gemfile.lock'" ]]
 }

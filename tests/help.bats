@@ -1,8 +1,8 @@
 #!/usr/bin/env bats
 
 MAKEFILE="
+# main.mk now includes help.mk implicitly
 include includes/main.mk
-include includes/help.mk
 
 #> global help
 

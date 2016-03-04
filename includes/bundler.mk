@@ -17,4 +17,3 @@ bundle: Gemfile.lock
 ifneq (main.mk,$(findstring main.mk,$(MAKEFILE_LIST)))
 include $(dir $(realpath $(lastword $(MAKEFILE_LIST))))/main.mk
 endif
-$(eval $(call import,log.mk))
