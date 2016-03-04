@@ -7,8 +7,13 @@ CLEAN += /tmp/__one__.clean /tmp/__two__.clean
 "
 
 setup() {
+  export OLDPATH=$PATH
   export PATH=tests/fixtures/bin:$PATH
   export SKIP_CLEAN_PROMPT=yes
+}
+
+teardown() {
+  export PATH=$OLDPATH
 }
 
 @test 'clean.mk executes default target with nothing to do' {
