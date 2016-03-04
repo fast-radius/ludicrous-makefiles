@@ -1,7 +1,7 @@
 #!/usr/bin/env bats
 
 MAKEFILE="
-include includes/zany.mk
+include includes/main.mk
 include includes/help.mk
 
 #> global help

@@ -1,4 +1,4 @@
-# Awk program for automatically generating help text from those zany makefiles.
+# Awk program for automatically generating help text from those ludicrous makefiles.
 # See help.mk for details.
 function len(a,    i, k) {
   for (i in a) k++

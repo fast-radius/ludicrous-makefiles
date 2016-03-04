@@ -20,6 +20,6 @@ help: | _program_awk
 
 .DEFAULT_GOAL := help
 
-ifneq (zany.mk,$(findstring zany.mk,$(MAKEFILE_LIST)))
-include $(INCLUDES_DIR)/zany.mk
+ifneq (main.mk,$(findstring main.mk,$(MAKEFILE_LIST)))
+include $(INCLUDES_DIR)/main.mk
 endif
