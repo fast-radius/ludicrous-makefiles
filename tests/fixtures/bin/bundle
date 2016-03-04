@@ -1,0 +1,12 @@
+#!/bin/bash
+set -e
+
+if [ "$1" == "check" ]; then
+  if [ "$BUNDLE_CHECK_ALWAYS_FAILS" == "yes" ]; then
+    exit 1
+  fi
+  touch ${PWD}/check
+fi
+
+echo bundle $@
+exit 0
