@@ -1,0 +1,13 @@
+#!/bin/bash
+set -e
+
+mkdir -p .env/bin
+
+cat <<EOF > .env/bin/pip
+#!/bin/bash
+echo pip \$@
+EOF
+chmod +x .env/bin/pip
+
+echo virutalenv $@
+exit 0
