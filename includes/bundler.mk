@@ -3,7 +3,7 @@
 BE := bundle exec
 BUNDLE_INSTALL_OPTS ?=
 
-Gemfile.lock: Gemfile | _program_bundle
+Gemfile.lock: Gemfile FORCE | _program_bundle
 	@bundle check &> /dev/null && \
 		$(call _log,rubygems up-to-date) || \
 		( $(call _log,installing rubygems); \
@@ -12,7 +12,7 @@ Gemfile.lock: Gemfile | _program_bundle
 #> installs rubygems
 bundle: Gemfile.lock
 
-.PHONY: bundle Gemfile.lock
+.PHONY: bundle
 
 ifneq (main.mk,$(findstring main.mk,$(MAKEFILE_LIST)))
 include $(dir $(realpath $(lastword $(MAKEFILE_LIST))))/main.mk
