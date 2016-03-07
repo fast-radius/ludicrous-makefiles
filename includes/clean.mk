@@ -10,7 +10,7 @@
 SKIP_CLEAN_PROMPT ?= no
 
 #> remove build artifacts
-clean:
+clean::
 ifeq (no,$(SKIP_CLEAN_PROMPT))
 	${if $(CLEAN),@echo "The following will be removed: $(CLEAN)"}
 	${if $(CLEAN),@read -p "Continue (y/N)? " ANSWER; \
