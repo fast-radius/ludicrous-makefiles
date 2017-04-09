@@ -15,11 +15,12 @@ test2:
   [ "$status" -eq 0 ]
   [ "${lines[0]}" == "tests/fixtures/bin/curl  \"http://localhost\" | cat -" ]
   [ "${lines[1]}" == "http://localhost" ]
+  echo ${output}
 }
 
 @test 'ludicrous.mk download_to callable attempts a download' {
   run make -f <(echo "$MAKEFILE") test2 DOWNLOADER=tests/fixtures/bin/curl
   [ "$status" -eq 0 ]
-  [ "${lines[0]}" == "tests/fixtures/bin/curl -o /tmp/nowhere \"http://localhost\"" ]
-  [ "${lines[1]}" == "-o /tmp/nowhere http://localhost" ]
+  [ "${lines[0]}" == "tests/fixtures/bin/curl --write-out \"%{http_code}\" -o /tmp/nowhere \"http://localhost\"" ]
+  [ "${lines[1]}" == "--write-out %{http_code} -o /tmp/nowhere http://localhost" ]
 }

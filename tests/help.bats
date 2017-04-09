@@ -6,8 +6,8 @@ fixtures help
   run make -f ${FIXTURES_ROOT}/Makefile help
   [ "$status" -eq 0 ]
   [ "${lines[0]}" == "global help" ]
-  [ "${lines[2]}" == "  test1          help for test1" ]
-  [ "${lines[3]}" == "  test2          help for test2" ]
+  [ "${lines[2]}" == "  test1               help for test1" ]
+  [ "${lines[3]}" == "  test2               help for test2" ]
 }
 
 cleanup
