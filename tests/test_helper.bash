@@ -6,14 +6,10 @@ unset_term() {
 }
 
 fixtures() {
-  export PATH=$PWD/tests/fixtures/$1/bin:$PATH
+  export FIXTURES_ROOT="$BATS_TEST_DIRNAME/fixtures/$1"
+  export PATH=$FIXTURES_ROOT/bin:$PATH
 }
 
-setup() {
-  LM_TEMPDIR=$(mktemp -d "${BATS_TMPDIR}/XXXXXXXX")
-}
-
-teardown() {
-  [ -d $LM_TEMPDIR ] && rm -r $LM_TEMPDIR
+cleanup() {
   export PATH=$OLD_PATH
 }
