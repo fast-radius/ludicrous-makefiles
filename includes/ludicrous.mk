@@ -80,7 +80,7 @@ endef
 #
 SKIP_CLEAN_PROMPT ?= no
 
-#> remove build artifacts
+#> removes build artifacts
 clean::
 ifeq (no,$(SKIP_CLEAN_PROMPT))
 	${if $(CLEAN),@echo "The following will be removed: $(CLEAN)"}
