@@ -119,13 +119,13 @@ endif
 # Additional command line parameters may be passed to curl or wget via CURL_OPTS
 # or WGET_OPTS, respectively. For example, `CURL_OPTS += -s`.
 #
-CURL_OPTS     ?= --location --silent --output /dev/stderr --write-out "%{http_code}"
+CURL_OPTS     ?= --location --silent
 WGET_OPTS     ?=
 
 ifneq ($(shell which curl 2> /dev/null),)
 DOWNLOADER         = curl $(CURL_OPTS)
 DOWNLOAD_FLAGS    :=
-DOWNLOAD_TO_FLAGS := -o
+DOWNLOAD_TO_FLAGS := --write-out "%{http_code}" -o
 else
 ifneq ($(shell which wget 2> /dev/null),)
 DOWNLOADER         = wget $(WGET_OPTS)
