@@ -1,4 +1,4 @@
-include includes/main.mk
+include includes/ludicrous.mk
 
 test1:
 	$(call log,the test1 target)

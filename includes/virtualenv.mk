@@ -26,6 +26,6 @@ virtualenv: $(PIP)
 
 CLEAN += $(VIRTUALENV_DIR)
 
-ifneq (main.mk,$(findstring main.mk,$(MAKEFILE_LIST)))
-include $(dir $(realpath $(lastword $(MAKEFILE_LIST))))/main.mk
+ifneq (ludicrous.mk,$(findstring ludicrous.mk,$(MAKEFILE_LIST)))
+include $(dir $(realpath $(lastword $(MAKEFILE_LIST))))/ludicrous.mk
 endif

@@ -1,6 +1,6 @@
 #!/usr/bin/env bats
 MAKEFILE="
-include ${PWD}/includes/main.mk
+include ${PWD}/includes/ludicrous.mk
 include ${PWD}/includes/virtualenv.mk
 
 test1: virtualenv

@@ -1,7 +1,7 @@
 #!/usr/bin/env bats
 
 MAKEFILE="
-include includes/main.mk
+include includes/ludicrous.mk
 
 CLEAN += /tmp/__one__.clean /tmp/__two__.clean
 "
@@ -16,7 +16,7 @@ teardown() {
   export PATH=$OLDPATH
 }
 
-@test 'main.mk clean attempts to cleanup the contents of CLEAN' {
+@test 'ludicrous.mk clean attempts to cleanup the contents of CLEAN' {
   run make -f <(echo "$MAKEFILE") clean
   [ "$status" -eq 0 ]
   [ "${lines[0]}" == "rm -rf /tmp/__one__.clean /tmp/__two__.clean" ]

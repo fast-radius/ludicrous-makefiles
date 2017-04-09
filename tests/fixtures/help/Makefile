@@ -1,6 +1,6 @@
 #> global help
 
-include includes/main.mk
+include includes/ludicrous.mk
 
 #> help for test1
 test1:

@@ -147,7 +147,3 @@ OS_NAME := $(shell uname -s)
 OS_ARCH := $(shell uname -m)
 OS_CPU  := $(if $(findstring 64,$(OS_ARCH)),amd64,x86)
 endif
-
-ifneq (main.mk,$(findstring main.mk,$(MAKEFILE_LIST)))
-include $(dir $(realpath $(lastword $(MAKEFILE_LIST))))/main.mk
-endif

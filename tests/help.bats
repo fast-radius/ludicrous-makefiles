@@ -2,7 +2,7 @@
 load test_helper
 fixtures help
 
-@test 'main.mk help target parses a makefile successfully' {
+@test 'ludicrous.mk help target parses a makefile successfully' {
   run make -f ${FIXTURES_ROOT}/Makefile help
   [ "$status" -eq 0 ]
   [ "${lines[0]}" == "global help" ]
