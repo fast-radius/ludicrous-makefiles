@@ -1,5 +1,9 @@
 # The "main" utility functions and helpers useful for the common case. Most
 # ludicrous makefiles require this file, so it's sensible to `include` it first.
+INCLUDES_DIR := $(dir $(realpath $(lastword $(MAKEFILE_LIST))))
+
+LUDICROUS_BRANCH := master
+LUDICROUS_DOWNLOAD_URL := https://raw.githubusercontent.com/martinwalsh/ludicrous-makefiles/$(LUDICROUS_BRANCH)/includes
 
 # Generates help text from specialized comments (lines prefixed with a `#>`).
 # Free-standing comments are included in the prologue of the help text, while
@@ -10,7 +14,7 @@
 # Requires: awk
 # Side effects:
 #   * .DEFAULT_GOAL is set to to the `help` target from this file
-INCLUDES_DIR := $(dir $(realpath $(lastword $(MAKEFILE_LIST))))
+#
 HELP_PROGRAM := $(INCLUDES_DIR)/help.awk
 
 #> displays this message
@@ -50,6 +54,7 @@ FORCE:
 TPUT        := $(shell which tput 2> /dev/null)
 TPUT_PREFIX := $(TPUT) bold
 TPUT_SUFFIX := $(TPUT) sgr0
+TPUT_RED    := $(TPUT) setaf 1
 
 ifeq (,$(and $(TPUT),$(TERM)))
 
@@ -57,10 +62,18 @@ define _log
 echo "===> $(1)"
 endef
 
+define _error
+echo "$(1)"
+endef
+
 else
 
 define _log
 $(TPUT_PREFIX); echo "===> $(1)"; $(TPUT_SUFFIX)
+endef
+
+define _error
+$(TPUT_PREFIX); $(TPUT_RED); echo "$(1)"; $(TPUT_SUFFIX)
 endef
 
 endif
@@ -106,7 +119,7 @@ endif
 # Additional command line parameters may be passed to curl or wget via CURL_OPTS
 # or WGET_OPTS, respectively. For example, `CURL_OPTS += -s`.
 #
-CURL_OPTS     ?= -L
+CURL_OPTS     ?= --location --silent --output /dev/stderr --write-out "%{http_code}"
 WGET_OPTS     ?=
 
 ifneq ($(shell which curl 2> /dev/null),)
@@ -147,3 +160,12 @@ OS_NAME := $(shell uname -s)
 OS_ARCH := $(shell uname -m)
 OS_CPU  := $(if $(findstring 64,$(OS_ARCH)),amd64,x86)
 endif
+
+# Install ludicrous plugins by include directive
+PLUGIN_TARGETS := $(INCLUDES_DIR)/%.mk $(patsubst /%/,%,$(subst $(CURDIR),,$(INCLUDES_DIR)))/%.mk
+
+$(PLUGIN_TARGETS):
+	$(call log,downloading $@)
+	STATUS="$$($(call download_to,$(LUDICROUS_DOWNLOAD_URL)/$(notdir $@),$@))"; \
+		 if [ $$STATUS -ne 200 ]; then $(call _error,plugin $@ not found.); exit 1; fi
+
