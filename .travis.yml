@@ -1,0 +1,7 @@
+language: c
+install: true
+script: make test
+
+os:
+  - linux
+  - osx
