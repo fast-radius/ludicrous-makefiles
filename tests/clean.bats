@@ -19,7 +19,7 @@ teardown() {
 
 @test 'ludicrous.mk clean attempts to cleanup the contents of CLEAN' {
   run make -f <(echo "$MAKEFILE") clean
-  debug "${status}" "${output}" "${lines[@]}"
+  __debug "${status}" "${output}" "${lines[@]}"
   [ "$status" -eq 0 ]
   [ "${lines[0]}" == "rm -rf /tmp/__one__.clean /tmp/__two__.clean" ]
   [ "${lines[1]}" == "mock-rm -rf /tmp/__one__.clean /tmp/__two__.clean" ]

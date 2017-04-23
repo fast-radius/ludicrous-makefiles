@@ -14,7 +14,7 @@ cleanup() {
   export PATH=$OLD_PATH
 }
 
-debug() {
+__debug() {
   printf '===> status <===\n%s\n' "$1"
   shift
   printf '===> output <===\n%s\n' "$1"

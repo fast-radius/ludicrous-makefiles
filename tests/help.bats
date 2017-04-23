@@ -4,7 +4,7 @@ fixtures help
 
 @test 'ludicrous.mk help target parses a makefile successfully' {
   run make -f ${FIXTURES_ROOT}/Makefile help
-  debug "${status}" "${output}" "${lines[@]}"
+  __debug "${status}" "${output}" "${lines[@]}"
 
   [ "$status" -eq 0 ]
   [ "${lines[0]}" == "global help" ]
