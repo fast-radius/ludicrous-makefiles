@@ -8,6 +8,7 @@ fixtures help
   [ "${lines[0]}" == "global help" ]
   [ "${lines[2]}" == "  test1               help for test1" ]
   [ "${lines[3]}" == "  test2               help for test2" ]
+  echo ${output}
 }
 
 cleanup
