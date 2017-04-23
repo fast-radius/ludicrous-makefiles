@@ -1,4 +1,5 @@
 #!/usr/bin/env bats
+load test_helper
 
 MAKEFILE='
 include includes/ludicrous.mk
@@ -12,14 +13,17 @@ test2:
 
 @test 'ludicrous.mk download callable attempts a download' {
   run make -f <(echo "$MAKEFILE") test1 DOWNLOADER=tests/fixtures/bin/curl
+  debug "${status}" "${output}" "${lines[@]}"
+
   [ "$status" -eq 0 ]
   [ "${lines[0]}" == "tests/fixtures/bin/curl  \"http://localhost\" | cat -" ]
   [ "${lines[1]}" == "http://localhost" ]
-  echo ${output}
 }
 
 @test 'ludicrous.mk download_to callable attempts a download' {
   run make -f <(echo "$MAKEFILE") test2 DOWNLOADER=tests/fixtures/bin/curl
+  debug "${status}" "${output}" "${lines[@]}"
+
   [ "$status" -eq 0 ]
   [ "${lines[0]}" == "tests/fixtures/bin/curl --write-out \"%{http_code}\" -o /tmp/nowhere \"http://localhost\"" ]
   [ "${lines[1]}" == "--write-out %{http_code} -o /tmp/nowhere http://localhost" ]

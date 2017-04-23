@@ -1,4 +1,6 @@
 #!/usr/bin/env bats
+load test_helper
+
 MAKEFILE="
 include ${PWD}/includes/ludicrous.mk
 include ${PWD}/includes/virtualenv.mk
@@ -26,6 +28,8 @@ teardown() {
 
 @test 'virtualenv.mk virtualenv should fail without requirements' {
   run make -f includes/virtualenv.mk virtualenv
+  debug "${status}" "${output}" "${lines[@]}"
+
   [ "$status" -eq 2 ]
   [[ "${lines[0]}" =~ "No rule to make target \`requirements.txt'" ]]
 }
@@ -33,8 +37,8 @@ teardown() {
 @test 'virtualenv.mk virtualenv' {
   export PATH=${PWD}/tests/fixtures/bin:$PATH
   cd $tempdir && run make test1
-  echo $status
-  echo $output
+  debug "${status}" "${output}" "${lines[@]}"
+
   [ "$status" -eq 0 ]
   [ "${lines[0]}" == "===> creating virtualenv at .env" ]
   [ "${lines[3]}" == "===> install python dependencies from requirements.txt" ]

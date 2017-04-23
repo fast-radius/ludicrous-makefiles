@@ -1,4 +1,6 @@
 #!/usr/bin/env bats
+load test_helper
+
 MAKEFILE="
 include includes/ludicrous.mk
 
@@ -11,17 +13,23 @@ test2: | _program_make
 
 @test 'ludicrous.mk executes without errors' {
   run make -f includes/ludicrous.mk
+  debug "${status}" "${output}" "${lines[@]}"
+
   [ "$status" -eq 0 ]
 }
 
 @test 'ludicrous.mk _program_% fails when command is not found' {
   run make -f <(echo "$MAKEFILE") test1
+  debug "${status}" "${output}" "${lines[@]}"
+
   [ "$status" -eq 2 ]
   [[ "${lines[0]}" =~ "`whatever` command not found" ]]
 }
 
 @test 'ludicrous.mk _program_make should find the make command' {
   run make -f <(echo "$MAKEFILE") test2
+  debug "${status}" "${output}" "${lines[@]}"
+
   [ "$status" -eq 0 ]
   [ "${lines[0]}" == "you should most definitly see this" ]
 }
