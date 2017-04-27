@@ -28,14 +28,14 @@ time. If useful to a broader audience, all the better.
   - semi-automatic prerequisite checking
   - semi-automatic cleanup
 2. Not too much magic
-3. A full unit test suite
+3. Unit tests
 4. Mechanism for for inclusion of primitives in an ala carte fashion
 5. Ability to override behaviors via local config
 
 ## Starting a new project
 
 ```
-make -f <(curl https://git.io/v93pb)
+make -f <(curl -L https://git.io/v93pb)
 ```
 
 ... More to come ...
