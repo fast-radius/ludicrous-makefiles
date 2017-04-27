@@ -34,5 +34,9 @@ time. If useful to a broader audience, all the better.
 
 ## Starting a new project
 
+```
+make -f <(curl https://git.io/v93pb)
+```
+
 ... More to come ...
 
