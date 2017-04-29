@@ -1,7 +1,7 @@
 .DEFAULT_GOAL := Makefile
 
-INCLUDES_DIR := .makefiles
-LUDICROUS_BRANCH := master
+INCLUDES_DIR ?= .makefiles
+LUDICROUS_BRANCH ?= master
 LUDICROUS_DOWNLOAD_URL := https://raw.githubusercontent.com/martinwalsh/ludicrous-makefiles/$(LUDICROUS_BRANCH)/includes
 
 $(INCLUDES_DIR):
