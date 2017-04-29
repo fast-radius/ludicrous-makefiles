@@ -19,8 +19,8 @@ fixtures bundler
 }
 
 @test 'bundler.mk installs a rubygem if bundle check fails' {
-  export BUNDLE_CHECK_ALWAYS_FAILS=yes
-  cd $FIXTURES_ROOT && run make test1
+  cd $FIXTURES_ROOT && \
+    BUNDLE_CHECK_ALWAYS_FAILS=yes run make test1
   __debug "${status}" "${output}" "${lines[@]}"
   [ "$status" -eq 0 ]
   [ "${lines[0]}" == "===> installing rubygems" ]
@@ -29,8 +29,9 @@ fixtures bundler
 }
 
 @test 'bundler.mk installs with options when provided' {
-  export BUNDLE_CHECK_ALWAYS_FAILS=yes
-  cd $FIXTURES_ROOT && run make test1 BUNDLE_INSTALL_OPTS="--deployment"
+  cd $FIXTURES_ROOT && \
+    BUNDLE_CHECK_ALWAYS_FAILS=yes \
+    run make test1 BUNDLE_INSTALL_OPTS="--deployment"
   __debug "${status}" "${output}" "${lines[@]}"
   [ "$status" -eq 0 ]
   [ "${lines[0]}" == "===> installing rubygems" ]
