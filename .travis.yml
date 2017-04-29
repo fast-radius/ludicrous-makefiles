@@ -1,6 +1,6 @@
 language: c
 install: true
-script: make test
+script: make --no-print-directory test
 
 os:
   - linux
