@@ -32,6 +32,15 @@ help: | _program_awk
 _program_%: FORCE
 	@_=$(or $(shell which $* 2> /dev/null),$(error `$*` command not found. Please install `$*` and try again))
 
+# Helper target for declaring required environment variables.
+#
+# For example,
+#   `my_target`: | _var_PARAMETER`
+#
+# will fail before running `my_target` if the variable `PARAMETER` is not declared.
+_var_%: FORCE
+	@_=$(or $($*),$(error `$*` is a required parameter))
+
 # The defult build dir, if we have only one it'll be easier to cleanup
 BUILD_DIR =: build
 

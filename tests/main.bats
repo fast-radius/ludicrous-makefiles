@@ -9,6 +9,12 @@ test1: | _program_whatever
 
 test2: | _program_make
 	@echo you should most definitly see this
+
+test3: | _var_WHATEVER
+	@echo you should not see this
+
+test4: | _var_USER
+	@echo you should most definitely see this
 "
 
 @test 'ludicrous.mk executes without errors' {
@@ -32,4 +38,20 @@ test2: | _program_make
 
   [ "$status" -eq 0 ]
   [ "${lines[0]}" == "you should most definitly see this" ]
+}
+
+@test 'ludicrous.mk _var_% fails when the env var is not defined' {
+  run make -f <(echo "$MAKEFILE") test3
+  __debug "${status}" "${output}" "${lines[@]}"
+
+  [ "$status" -eq 2 ]
+  [[ "${lines[0]}" =~ "`WHATEVER` is a required parameter" ]]
+}
+
+@test 'ludicrous.mk _var_USER should not fail' {
+  run make -f <(echo "$MAKEFILE") test4
+  __debug "${status}" "${output}" "${lines[@]}"
+
+  [ "$status" -eq 0 ]
+  [ "${lines[0]}" == "you should most definitely see this" ]
 }
