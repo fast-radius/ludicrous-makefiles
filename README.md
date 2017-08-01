@@ -16,8 +16,26 @@
 
 ## Starting a new project
 
+Run the following command in the root of your project:
+
 ```
 make -f <(curl -L https://git.io/v93pb)
+```
+
+Edit the generated `Makefile` and add any useful includes as necessary (see
+[includes/](https://github.com/martinwalsh/ludicrous-makefiles/tree/master/includes) for more
+examples):
+
+```
+# Makefile
+include .makefiles/virtualenv.mk
+```
+
+Run `make` to download the added includes:
+
+```
+$ make
+===> downloading .makefiles/virtualenv.mk
 ```
 
 ... More to come ...
