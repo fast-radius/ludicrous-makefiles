@@ -64,25 +64,28 @@ TPUT        := $(shell which tput 2> /dev/null)
 TPUT_PREFIX := $(TPUT) bold
 TPUT_SUFFIX := $(TPUT) sgr0
 TPUT_RED    := $(TPUT) setaf 1
+TPUT_GREEN  := $(TPUT) setaf 2
+TPUT_YELLOW := $(TPUT) setaf 3
+LOG_PREFIX  ?= ===>
 
 ifeq (,$(and $(TPUT),$(TERM)))
 
 define _log
-echo "===> $(1)"
+echo "$(if $(LOG_PREFIX),$(LOG_PREFIX) )$(1)"
 endef
 
 define _error
-echo "$(1)"
+echo "$(if $(LOG_PREFIX),$(LOG_PREFIX) )$(1)"
 endef
 
 else
 
 define _log
-$(TPUT_PREFIX); echo "===> $(1)"; $(TPUT_SUFFIX)
+$(TPUT_PREFIX); echo "$(if $(LOG_PREFIX),$(LOG_PREFIX) )$(1)"; $(TPUT_SUFFIX)
 endef
 
 define _error
-$(TPUT_PREFIX); $(TPUT_RED); echo "$(1)"; $(TPUT_SUFFIX)
+$(TPUT_PREFIX); $(TPUT_RED); echo "$(if $(LOG_PREFIX),$(LOG_PREFIX) )$(1)"; $(TPUT_SUFFIX)
 endef
 
 endif
