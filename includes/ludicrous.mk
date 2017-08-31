@@ -108,27 +108,19 @@ clean::
 # * `download_to`: fetches a url `$(1)` and writes it to a local path specified in `$(2)`.
 #   Usage: `$(call download_to,$(URL),/tmp/dest)`
 #
-# If the curl command is found on the system path it will be used first, followed by wget.
-# If niether curl nor wget is found an error is raised when either of the callables is used.
+# Requires: curl
 #
-# Additional command line parameters may be passed to curl or wget via CURL_OPTS
-# or WGET_OPTS, respectively. For example, `CURL_OPTS += -s`.
+# Additional command line parameters may be passed to curl via CURL_OPTS.
+# For example, `CURL_OPTS += -s`.
 #
-CURL_OPTS     ?= --location --silent
-WGET_OPTS     ?=
+CURL_OPTS ?= --location --silent
 
 ifneq ($(shell which curl 2> /dev/null),)
-DOWNLOADER         = curl $(CURL_OPTS)
-DOWNLOAD_FLAGS    :=
+DOWNLOADER = curl $(CURL_OPTS)
+DOWNLOAD_FLAGS :=
 DOWNLOAD_TO_FLAGS := --write-out "%{http_code}" -o
 else
-ifneq ($(shell which wget 2> /dev/null),)
-DOWNLOADER         = wget $(WGET_OPTS)
-DOWNLOAD_FLAGS    := -O -
-DOWNLOAD_TO_FLAGS := -O
-else
-NO_DOWNLOADER_FOUND := Unable to locate a suitable download utility (curl or wget)
-endif
+NO_DOWNLOADER_FOUND := Unable to locate a suitable download utility (curl)
 endif
 
 define download
