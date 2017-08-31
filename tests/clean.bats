@@ -4,7 +4,8 @@ load test_helper
 MAKEFILE="
 include includes/ludicrous.mk
 
-CLEAN += /tmp/__one__.clean /tmp/__two__.clean
+clean::
+	rm -rf /tmp/__one__.clean /tmp/__two__.clean
 "
 
 setup() {
