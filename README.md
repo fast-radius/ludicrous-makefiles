@@ -56,3 +56,4 @@ I'm no expert, by any means, but I have used Make with great success in my work 
 During this time a number of patterns have surfaced. Therefore, the purpose of this project is to
 explore these patterns, put them down into a sharable form so that they can be improved over time,
 while expanding my own understanding. If useful to a broader audience, all the better.
+
