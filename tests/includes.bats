@@ -17,7 +17,7 @@ plugin_targets:
   __debug "${status}" "${output}" "${lines[@]}"
 
   [ "$status" -eq 0 ]
-  [[ "${lines[1]}" =~  includes\/%\.mk ]]
+  [[ "${output}" ==  *"includes/%.mk"* ]]
 }
 
 @test 'ludicrous.mk will attempt to download missing includes' {
@@ -25,8 +25,8 @@ plugin_targets:
   __debug "${status}" "${output}" "${lines[@]}"
 
   [ "$status" -eq 0 ]
-  [[ "${lines[1]}" == "Nothing to see here" ]]
-  [[ "${lines[0]}" == *"downloading ludicrous plugin to includes/_whatever.mk"* ]]
+  [[ "${output}" == *"downloading ludicrous plugin to includes/_whatever.mk"* ]]
+  [[ "${output}" == *"Nothing to see here"* ]]
 }
 
 @test 'ludicrous.mk will error if the include does not exist upstream' {
@@ -34,8 +34,8 @@ plugin_targets:
   __debug "${status}" "${output}" "${lines[@]}"
 
   [ "$status" -eq 2 ]
-  [[ "${lines[1]}" =~ _whatever\.mk\ not\ found ]]
-  [[ "${lines[3]}" =~ "Error 1" ]]
+  [[ "${output}" == *"_whatever.mk not found"* ]]
+  [[ "${output}" == *"includes/_whatever.mk] Error 1"* ]]
 }
 
 @test 'ludicrous.mk should not attempt to download an already existing include' {
