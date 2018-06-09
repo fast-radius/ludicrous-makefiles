@@ -31,7 +31,7 @@ teardown() {
   __debug "${status}" "${output}" "${lines[@]}"
 
   [ "$status" -eq 2 ]
-  [[ "${lines[0]}" =~ "No rule to make target \`requirements.txt'" ]]
+  [[ "${lines[0]}" =~ No\ rule\ to\ make\ target\ [\`\']requirements.txt\' ]]
 }
 
 @test 'virtualenv.mk virtualenv' {

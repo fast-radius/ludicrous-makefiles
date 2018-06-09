@@ -7,7 +7,9 @@ fixtures bundler
   run make -f includes/bundler.mk bundle
   __debug "${status}" "${output}" "${lines[@]}"
   [ "$status" -eq 2 ]
-  [[ "${lines[0]}" =~ "No rule to make target \`Gemfile', needed by \`Gemfile.lock'" ]]
+  # The esaping below is a travesty, but seemingly necessary for bash regex matching in 3.2,
+  # and quoted strings apparently do not expand regex character classes.
+  [[ "${lines[0]}" =~ No\ rule\ to\ make\ target\ [\`\']Gemfile\',\ needed\ by\ [\`\']Gemfile\.lock\' ]]
 }
 
 @test 'bundler.mk skips install if bundle check succeeds' {
