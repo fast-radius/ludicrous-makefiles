@@ -1,0 +1,3 @@
+#!/bin/bash
+echo 404
+exit 0

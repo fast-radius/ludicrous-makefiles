@@ -21,5 +21,7 @@ __debug() {
   shift
   echo "===> lines <==="
   locallines=("${@}")
-  printf '%s\n' "${locallines[@]}"
+  for i in ${!locallines[@]}; do
+    echo "$i: ${locallines[$i]}"
+  done
 }

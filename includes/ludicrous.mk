@@ -152,7 +152,10 @@ endif
 PLUGIN_TARGETS := $(INCLUDES_DIR)/%.mk $(patsubst /%/,%,$(subst $(CURDIR),,$(INCLUDES_DIR)))/%.mk
 
 $(PLUGIN_TARGETS):
-	$(call log,downloading $@)
-	STATUS="$$($(call download_to,$(LUDICROUS_DOWNLOAD_URL)/$(notdir $@),$@))"; \
-		 if [ $$STATUS -ne 200 ]; then $(call _error,plugin $@ not found.); exit 1; fi
+	@[ ! -f $@ ] && \
+	( \
+		$(call _log,downloading ludicrous plugin to $@); \
+		STATUS="$$($(call download_to,$(LUDICROUS_DOWNLOAD_URL)/$(notdir $@),$@))"; \
+			 if [ $$STATUS -ne 200 ]; then $(call _error,ludicrous plugin $(notdir $@) not found.); exit 1; fi \
+	)
 
