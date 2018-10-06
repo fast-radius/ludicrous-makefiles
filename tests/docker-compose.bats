@@ -28,10 +28,10 @@ teardown() {
   __debug "${status}" "${output}" "${lines[@]}"
 
   [ "$status" -eq 0 ]
-  [ "${lines[0]}" == "mock-touch .docker-compose-build-complete" ]
-  [ "${lines[1]}" == "===> building from docker-compose.yml" ]
-  [ "${lines[2]}" == "docker-compose -f docker-compose.yml build --pull" ]
-  [ "${lines[3]}" == "mock-docker-compose -f docker-compose.yml build --pull" ]
+  [ "${lines[0]}" == "===> building from docker-compose.yml" ]
+  [ "${lines[1]}" == "docker-compose -f docker-compose.yml build --pull" ]
+  [ "${lines[2]}" == "mock-docker-compose -f docker-compose.yml build --pull" ]
+  [ "${lines[3]}" == "mock-touch .docker-compose-build-complete" ]
 }
 
 @test 'docker-compose.mk build can override docker-compose.yml' {
@@ -41,10 +41,10 @@ teardown() {
   __debug "${status}" "${output}" "${lines[@]}"
 
   [ "$status" -eq 0 ]
-  [ "${lines[0]}" == "mock-touch .docker-compose-build-complete" ]
-  [ "${lines[1]}" == "===> building from whatever-compose.yml" ]
-  [ "${lines[2]}" == "docker-compose -f whatever-compose.yml build --pull" ]
-  [ "${lines[3]}" == "mock-docker-compose -f whatever-compose.yml build --pull" ]
+  [ "${lines[0]}" == "===> building from whatever-compose.yml" ]
+  [ "${lines[1]}" == "docker-compose -f whatever-compose.yml build --pull" ]
+  [ "${lines[2]}" == "mock-docker-compose -f whatever-compose.yml build --pull" ]
+  [ "${lines[3]}" == "mock-touch .docker-compose-build-complete" ]
 }
 
 @test 'docker-compose.mk build can disable --pull' {
@@ -54,7 +54,7 @@ teardown() {
   __debug "${status}" "${output}" "${lines[@]}"
 
   [ "$status" -eq 0 ]
-  [ "${lines[2]}" == "docker-compose -f docker-compose.yml build " ]  # trailing whitespace intentional
+  [ "${lines[1]}" == "docker-compose -f docker-compose.yml build " ]  # trailing whitespace intentional
 }
 
 @test 'docker-compose.mk up should run docker-compose' {
@@ -113,4 +113,15 @@ teardown() {
 
   [ "$status" -eq 0 ]
   [ "${lines[0]}" != "===> WARNING: .docker-compose-build-complete not found in .gitignore" ]
+}
+
+@test 'docker-compose.mk build should not build if the marker is present' {
+  export PATH=${PWD}/tests/fixtures/bin:$PATH
+  printf ".docker-compose-build-complete\n" > ${tempdir}/.gitignore
+  echo '' > ${tempdir}/.docker-compose-build-complete
+  cd $tempdir && run make build
+  __debug "${status}" "${output}" "${lines[@]}"
+
+  [ "$status" -eq 0 ]
+  [ "${output}" == "" ]
 }

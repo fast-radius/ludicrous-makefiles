@@ -9,12 +9,12 @@ DOCKER_COMPOSE_CLEAN_FLAGS ?= --rmi all --volumes --remove-orphans
 .docker-compose-build-complete:
 	@[ -f .gitignore -a -z "$$(grep '$@' .gitignore 2> /dev/null)" ] && \
 		( $(call _warn,WARNING: $@ not found in .gitignore) ) || true
+	$(call log,building from $(DOCKER_COMPOSE_FILE))
+	docker-compose -f $(DOCKER_COMPOSE_FILE) build $(DOCKER_COMPOSE_BUILD_FLAGS)
 	@touch $@
 
 #> build docker image
 build:: .docker-compose-build-complete | _program_docker-compose
-	$(call log,building from $(DOCKER_COMPOSE_FILE))
-	docker-compose -f $(DOCKER_COMPOSE_FILE) build $(DOCKER_COMPOSE_BUILD_FLAGS)
 .PHONY: build
 
 #> run docker-compose up
