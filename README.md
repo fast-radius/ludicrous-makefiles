@@ -38,22 +38,18 @@ $ make
 ===> downloading .makefiles/virtualenv.mk
 ```
 
-... More to come ...
-
 ## Rationale
 
 As a sysadmin by trade, I've come to appreciate the GNU Make utility as a general purpose automation
-tool, useful for many project types and not just those involving compiled languages. It's a fairly
-easy choice, as GNU Make is part of the standard development tool-chain.  In fact, if you have any
-interest in this project (and I would think so, since you're reading this blather) there's a good
-chance you already have GNU Make installed.
+tool. Make is useful for many project types, and not just those involving compiled languages.  It's
+a relatively easy choice, as Make is typically part of the standard development tool-chain. In fact,
+there's a good chance you already have GNU Make installed whether you realize it or not.
 
-In addition to its ubiquity, GNU Make's syntax is straightforward and its concept of a recipe is
-relatively easy to understand even for folks who don't use it often. A recipe defines a target, its
-dependencies and the shell commands used to build it. As such, recipes are self-documenting.
+In addition to its ubiquity, Make's syntax is straightforward. Its concept of a recipe is easy to
+understand even for those who don't use it often. A recipe defines a target, its dependencies and
+the shell commands used to build it. As such, Make recipes are also self-documenting.
 
-I'm no expert, by any means, but I have used Make with great success in my work as a sysadmin.
-During this time a number of patterns have surfaced. Therefore, the purpose of this project is to
-explore these patterns, put them down into a sharable form so that they can be improved over time,
-while expanding my own understanding. If useful to a broader audience, all the better.
-
+I'm no expert by any means, but I have used Make with great success in my work as a sysadmin.
+During this time a number of patterns have surfaced. And so the purpose of this project is to
+explore those patterns. Put them down into a sharable form, so that they can be improved over time
+and new patterns might be found.
