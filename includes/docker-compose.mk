@@ -11,18 +11,19 @@ DOCKER_COMPOSE_CLEAN_FLAGS ?= --rmi all --volumes --remove-orphans
 		$(call _warn,WARNING: $@ not found in .gitignore) || true
 	@touch $@
 
+#> build docker image
 build:: .docker-compose-build-complete | _program_docker-compose
 	$(call log,building from $(DOCKER_COMPOSE_FILE))
 	docker-compose -f $(DOCKER_COMPOSE_FILE) build $(DOCKER_COMPOSE_BUILD_FLAGS)
 .PHONY: build
 
-# run docker-compose up
-up: | _program_docker-compose
+#> run docker-compose up
+up: build | _program_docker-compose
 	$(call log,starting docker services in $(DOCKER_COMPOSE_FILE))
 	docker-compose -f $(DOCKER_COMPOSE_FILE) up $(DOCKER_COMPOSE_UP_FLAGS)
 .PHONY: up
 
-# run docker-compose down
+#> run docker-compose down
 down: | _program_docker-compose
 	$(call log,stopping docker services in $(DOCKER_COMPOSE_FILE))
 	docker-compose -f $(DOCKER_COMPOSE_FILE) down

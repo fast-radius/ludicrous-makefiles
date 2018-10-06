@@ -63,7 +63,7 @@ teardown() {
   __debug "${status}" "${output}" "${lines[@]}"
 
   [ "$status" -eq 0 ]
-  [ "${lines[1]}" == "docker-compose -f docker-compose.yml up -d" ]
+  [ "${lines[5]}" == "docker-compose -f docker-compose.yml up -d" ]
 }
 
 @test 'docker-compose.mk up should run docker-compose without -d' {
@@ -73,7 +73,7 @@ teardown() {
   __debug "${status}" "${output}" "${lines[@]}"
 
   [ "$status" -eq 0 ]
-  [ "${lines[1]}" == "docker-compose -f docker-compose.yml up " ]  # trailing whitespace intentional
+  [ "${lines[5]}" == "docker-compose -f docker-compose.yml up " ]  # trailing whitespace intentional
 }
 
 @test 'docker-compose.mk down should run docker-compose' {
