@@ -18,8 +18,10 @@ LUDICROUS_DOWNLOAD_URL := https://raw.githubusercontent.com/martinwalsh/ludicrou
 HELP_PROGRAM := $(INCLUDES_DIR)/help.awk
 
 #> displays this message
+help: _HELP_F := $(firstword $(MAKEFILE_LIST))
+help: _HELP_R := $(filter-out $(_HELP_F),$(MAKEFILE_LIST))
 help: | _program_awk
-	@awk -f $(HELP_PROGRAM) $(MAKEFILE_LIST)
+	@awk -f $(HELP_PROGRAM) $(_HELP_R) $(_HELP_F)  # always prefer help from the top-level makefile
 .PHONY: help
 
 .DEFAULT_GOAL := help
