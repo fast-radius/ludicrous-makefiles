@@ -74,6 +74,10 @@ define _log
 echo "$(if $(LOG_PREFIX),$(LOG_PREFIX) )$(1)"
 endef
 
+define _warn
+echo "$(if $(LOG_PREFIX),$(LOG_PREFIX) )$(1)"
+endef
+
 define _error
 echo "$(if $(LOG_PREFIX),$(LOG_PREFIX) )$(1)"
 endef
@@ -82,6 +86,10 @@ else
 
 define _log
 $(TPUT_PREFIX); echo "$(if $(LOG_PREFIX),$(LOG_PREFIX) )$(1)"; $(TPUT_SUFFIX)
+endef
+
+define _warn
+$(TPUT_PREFIX); $(TPUT_YELLOW); echo "$(if $(LOG_PREFIX),$(LOG_PREFIX) )$(1)"; $(TPUT_SUFFIX)
 endef
 
 define _error

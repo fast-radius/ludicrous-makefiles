@@ -15,14 +15,14 @@ setup() {
   unset TERM
   export OLDPATH=$PATH
   tempdir=`mktemp /tmp/XXXXXXXX`
-  rm -f $tempdir &&  mkdir $tempdir
+  rm -f $tempdir && mkdir $tempdir
   echo "$MAKEFILE" > ${tempdir}/Makefile
   echo "$REQUIREMENTS" > ${tempdir}/requirements.txt
 }
 
 teardown() {
   export PATH=$OLDPATH
-  #rm -rf $tempdir
+  rm -rf $tempdir
   echo $tempdir
 }
 
