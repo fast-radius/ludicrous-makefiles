@@ -104,3 +104,13 @@ teardown() {
   [ "$status" -eq 0 ]
   [ "${lines[0]}" == "===> WARNING: .docker-compose-build-complete not found in .gitignore" ]
 }
+
+@test 'docker-compose.mk build should warn about .gitignore unless the marker is present' {
+  export PATH=${PWD}/tests/fixtures/bin:$PATH
+  printf ".docker-compose-build-complete\n" > ${tempdir}/.gitignore
+  cd $tempdir && run make build
+  __debug "${status}" "${output}" "${lines[@]}"
+
+  [ "$status" -eq 0 ]
+  [ "${lines[0]}" != "===> WARNING: .docker-compose-build-complete not found in .gitignore" ]
+}
