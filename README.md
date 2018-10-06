@@ -12,7 +12,7 @@
 2. Not too much magic
 3. Unit tests
 4. Mechanism for for inclusion of primitives in an ala carte fashion
-5. Ability to override behaviors via local config
+5. Ability to override behaviors via local config (not implemented)
 
 ## Starting a new project
 
