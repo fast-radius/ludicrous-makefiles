@@ -39,10 +39,19 @@ plugin_targets:
 }
 
 @test 'ludicrous.mk should not attempt to download an already existing include' {
+  run make -f <(echo "$MAKEFILE") test1 DOWNLOADER=tests/fixtures/bin/curl_200
+  __debug "${status}" "${output}" "${lines[@]}"
+
+  [ "${status}" -eq 0 ]
+  [[ "${output}" != *"downloading ludicrous plugin to includes/ludicrous.mk"* ]]
+  [[ "${output}" == *"downloading ludicrous plugin to includes/_whatever.mk"* ]]
+}
+
+@test 'ludicrous.mk should not attempt to download any include when forced with -B' {
   run make -B -f <(echo "$MAKEFILE") test1 DOWNLOADER=tests/fixtures/bin/curl_200
   __debug "${status}" "${output}" "${lines[@]}"
 
-  [ "${status}" -eq 2 ]
+  [ "${status}" -eq 0 ]
   [[ "${output}" != *"downloading ludicrous plugin to includes/ludicrous.mk"* ]]
-  [[ "${output}" == *"downloading ludicrous plugin to includes/_whatever.mk"* ]]
+  [[ "${output}" != *"downloading ludicrous plugin to includes/_whatever.mk"* ]]
 }
