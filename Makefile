@@ -26,7 +26,7 @@ README.md: | _var_VERSION
 _tag: | _var_VERSION
 	make --no-print-directory -B README.md
 	git commit -am "Tagging release $(VERSION)"
-	git tag -a $(VERSION) $(if $(NOTES),-m '$(NOTES)')
+	git tag -a $(VERSION) $(if $(NOTES),-m '$(NOTES)',-m $(VERSION))
 .PHONY: _tag
 
 
