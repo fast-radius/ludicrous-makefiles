@@ -13,7 +13,7 @@ DOCKER_COMPOSE_CLEAN_FLAGS ?= --rmi all --volumes --remove-orphans
 	docker-compose -f $(DOCKER_COMPOSE_FILE) build $(DOCKER_COMPOSE_BUILD_FLAGS)
 	@touch $@
 
-#> build docker image
+#> build docker images (force rebuild with -B)
 build:: .docker-compose-build-complete | _program_docker-compose
 .PHONY: build
 
