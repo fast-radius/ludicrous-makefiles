@@ -10,10 +10,6 @@ Gemfile.lock: Gemfile FORCE | _program_bundle
 		  bundle install $(BUNDLE_INSTALL_OPTS) )
 
 #> installs rubygems
-bundle: Gemfile.lock
+bundle:: Gemfile.lock
 
 .PHONY: bundle
-
-ifneq (ludicrous.mk,$(findstring ludicrous.mk,$(MAKEFILE_LIST)))
-include $(dir $(realpath $(lastword $(MAKEFILE_LIST))))/ludicrous.mk
-endif

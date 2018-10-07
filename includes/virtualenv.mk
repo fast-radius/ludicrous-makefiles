@@ -20,15 +20,9 @@ $(PIP): $(PIP_REQUIREMENTS) | $(VIRTUALENV_DIR)
 	@touch $(PIP)
 
 #> installs python dependencies
-virtualenv: $(PIP)
-
+virtualenv:: $(PIP)
 .PHONY: virtualenv
-
 
 clean::
 	rm -rf $(VIRTUALENV_DIR)
 .PHONY: clean
-
-ifneq (ludicrous.mk,$(findstring ludicrous.mk,$(MAKEFILE_LIST)))
-include $(dir $(realpath $(lastword $(MAKEFILE_LIST))))/ludicrous.mk
-endif

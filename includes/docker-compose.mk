@@ -18,13 +18,13 @@ build:: .docker-compose-build-complete | _program_docker-compose
 .PHONY: build
 
 #> run docker-compose up
-up: build | _program_docker-compose
+up:: build | _program_docker-compose
 	$(call log,starting docker services in $(DOCKER_COMPOSE_FILE))
 	docker-compose -f $(DOCKER_COMPOSE_FILE) up $(DOCKER_COMPOSE_UP_FLAGS)
 .PHONY: up
 
 #> run docker-compose down
-down: | _program_docker-compose
+down:: | _program_docker-compose
 	$(call log,stopping docker services in $(DOCKER_COMPOSE_FILE))
 	docker-compose -f $(DOCKER_COMPOSE_FILE) down
 .PHONY: down
