@@ -20,7 +20,7 @@ endif
 
 README.md: | _var_VERSION
 	CODE=$$(curl -s -i https://git.io -F "url=$(BOOTSTRAP_URL)" | grep Location | cut -d'/' -f4 | tr -d '\r'); \
-		 sed $(INPLACE) -E -e "s/git.io\/([a-zA-Z0-9]+)\)/git.io\/$${CODE})  # release: $(VERSION)/g" README.md
+		 sed $(INPLACE) -E -e "s/git.io\/([a-zA-Z0-9]+).*/git.io\/$${CODE})  # release: $(VERSION)/g" README.md
 
 
 _tag: | _var_VERSION
