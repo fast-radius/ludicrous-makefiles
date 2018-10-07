@@ -19,7 +19,7 @@
 Run the following command in the root of your project:
 
 ```
-make -f <(curl -L https://git.io/v93pb)
+make -f <(curl -L https://git.io/fxs2w)  # release: v2018.10.1
 ```
 
 Edit the generated `Makefile` and add any useful includes as necessary (see
