@@ -158,8 +158,9 @@ OS_CPU  := $(if $(findstring 64,$(OS_ARCH)),amd64,x86)
 endif
 
 # Install ludicrous plugins by include directive
-PLUGIN_TARGETS := $(INCLUDES_DIR)/%.mk $(patsubst /%/,%,$(subst $(CURDIR),,$(INCLUDES_DIR)))/%.mk
+PLUGIN_TARGETS := $(abspath $(INCLUDES_DIR)/%.mk) $(subst $(CURDIR)/,,$(abspath $(INCLUDES_DIR)/%.mk))
 
+ifneq (B,$(findstring B,$(MAKEFLAGS)))
 $(PLUGIN_TARGETS):
 	@[ ! -f $@ ] && \
 	( \
@@ -167,4 +168,7 @@ $(PLUGIN_TARGETS):
 		STATUS="$$($(call download_to,$(LUDICROUS_DOWNLOAD_URL)/$(notdir $@),$@))"; \
 			 if [ $$STATUS -ne 200 ]; then $(call _error,ludicrous plugin $(notdir $@) not found.); exit 1; fi \
 	)
-
+else
+$(PLUGIN_TARGETS):
+	@:
+endif
